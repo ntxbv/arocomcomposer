@@ -111,7 +111,7 @@
             "url": "git@service.arocom.de:arocom/arocom_block_content.git"
         },
         {
-            "type": "git",
+            "type": "github",
             "url": "https://github.com/ntxbv/arocomcomposer"
         },
         {
