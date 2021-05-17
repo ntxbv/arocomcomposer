@@ -152,7 +152,6 @@
         "drupal/redis": "dev-master",
         "drupal/stage_file_proxy": "dev-master",
         "drush/drush": "^9.7.1 | ^10.0.0",
-        "eugenz3rr-arocom/composer-merge-plugin": "dev-master",
         "lakedrops/docker4drupal": "dev-master",
         "oomphinc/composer-installers-extender": "dev-master",
         "vlucas/phpdotenv": "dev-master",
