@@ -138,7 +138,6 @@
     "require": {
         "php": ">=7.0.8",
         "ext-json": "*",
-        "arocom/arocom_feedback": "^2",
         "arocom/drush_collection": "dev-14498-drush-9",
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6.5",
