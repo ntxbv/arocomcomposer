@@ -1,0 +1,277 @@
+{
+    "name": "drupal-composer/drupal-project",
+    "description": "Project template for Drupal 8 projects with composer",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Nils Traut <traut@arocom.de>",
+            "role": ""
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        },
+        {
+            "type": "git",
+            "url": "git@service.arocom.de:arocom/arocom_antispam.git"
+        },
+        {
+            "type": "git",
+            "url": "git@service.arocom.de:arocom/arocom_back_to_top.git"
+        },
+        {
+            "type": "git",
+            "url": "git@service.arocom.de:arocom/arocom_feedback.git"
+        },
+        {
+            "type": "git",
+            "url": "git@service.arocom.de:arocom/drush_collection.git"
+        },
+        {
+            "type": "git",
+            "url": "git@service.arocom.de:arocom/form_element_access.git"
+        },
+        {
+            "type": "git",
+            "url": "git@service.arocom.de:arocom/arocom_changelog.git"
+        },
+        {
+            "type": "git",
+            "url": "git@service.arocom.de:arocom/route_access_alter.git"
+        },
+        {
+            "type": "git",
+            "url": "git@service.arocom.de:arocom/localized_config.git"
+        },
+        {
+            "type": "git",
+            "url": "git@service.arocom.de:arocom/simple_cache_warmer.git"
+        },
+        {
+            "type": "git",
+            "url": "git@service.arocom.de:arocom/dynamic_entity_list.git"
+        },
+        {
+            "type": "git",
+            "url": "git@service.arocom.de:arocom/arocom_google_tag.git"
+        },
+        {
+            "type": "git",
+            "url": "git@service.arocom.de:arocom/arocom_entity_autocomplete.git"
+        },
+        {
+            "type": "git",
+            "url": "git@service.arocom.de:arocom/ui_toggle.git"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "kenwheeler/slick",
+                "version": "1.8.1",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://github.com/kenwheeler/slick/archive/v1.8.1.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "enyo/dropzone",
+                "version": "5.7.1",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://github.com/enyo/dropzone/archive/v5.7.0.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "type": "drupal-library",
+                "name": "harvesthq/chosen",
+                "version": "1.8.7",
+                "dist": {
+                    "url": "https://github.com/harvesthq/chosen-package/archive/v1.8.7.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "git",
+            "url": "git@service.arocom.de:arocom/arocom_block_content.git"
+        },
+        {
+            "type": "git",
+            "url": "git@service.arocom.de:arocom/arocom_layouts.git"
+        },
+        {
+            "type": "git",
+            "url": "git@service.arocom.de:arocom/arocom_block_content_clone.git"
+        },
+        {
+            "type": "git",
+            "url": "git@service.arocom.de:arocom/arocom_mmenu.git"
+        },
+        {
+            "type": "git",
+            "url": "git@service.arocom.de:arocom/arocom_masquerade.git"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/eugenz3rr-arocom/composer-merge-plugin.git"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.8",
+        "ext-json": "*",
+        "arocom/arocom_feedback": "^2",
+        "arocom/drush_collection": "dev-14498-drush-9",
+        "composer/installers": "^1.2",
+        "cweagans/composer-patches": "^1.6.5",
+        "drupal/admin_toolbar": "3.0.0",
+        "drupal/config_filter": "2.2.0",
+        "drupal/config_split": "2.0.0-beta2",
+        "drupal/config_sync": "^2.0@beta",
+        "drupal/core": "^8.8.0",
+        "drupal/core-composer-scaffold": "^8.8.0",
+        "drupal/key": "1.14.0",
+        "drupal/masquerade": "2.0.0-beta4",
+        "drupal/pathauto": "1.8.0",
+        "drupal/redis": "1.5.0",
+        "drupal/stage_file_proxy": "1.1.0",
+        "drush/drush": "^9.7.1 | ^10.0.0",
+        "eugenz3rr-arocom/composer-merge-plugin": "dev-master",
+        "lakedrops/docker4drupal": "^3.2",
+        "oomphinc/composer-installers-extender": "^2",
+        "vlucas/phpdotenv": "^4.0",
+        "webflo/drupal-finder": "^1",
+        "webmozart/path-util": "^2",
+        "zaporylie/composer-drupal-optimizations": "^1.0"
+    },
+    "require-dev": {
+        "drupal/core-dev": "^8.8.0",
+        "lakedrops/drupal-development-environment": "^3.1"
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "source"
+    },
+    "autoload": {
+        "classmap": [
+            "scripts/composer/ScriptHandler.php"
+        ],
+        "files": ["load.environment.php"]
+    },
+    "scripts": {
+        "arocom-base-patches": "DrupalProject\\composer\\ScriptHandler::applyBasePatches",
+        "arocom-post-scaffold": "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
+        "arocom-git-purge": "DrupalProject\\composer\\ScriptHandler::removeGitRepositories",
+        "post-install-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::postInstall"
+        ],
+        "post-update-cmd": [
+            "DrupalProject\\composer\\ScriptHandler::postUpdate"
+        ],
+        "tdd-phantomjs": [
+            "mkdir -p drupal/sites/default/simpletest && chmod 777 drupal/sites/default/simpletest",
+            "./tests/bin/phantomjs --ssl-protocol=any --ignore-ssl-errors=true ./vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768 > /dev/null 2>&1"
+        ],
+        "tdd-phpunit": [
+            "./vendor/bin/phpunit -c core/phpunit.xml --testsuite=unit"
+        ]
+    },
+    "scripts-descriptions": {
+        "tdd-phantomjs": "Drupal 8: Run PhantomJS.",
+        "tdd-phpunit": "Drupal 8: Run Drupal's 8 core Unit tests."
+    },
+    "extra": {
+        "patches-file": "patches/composer.patches.json",
+        "enable-patching": true,
+        "composer-exit-on-patch-failure": true,
+        "patchLevel": {
+            "web/core": "-p2"
+        },
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "web/",
+                "project-root": "web/"
+            }
+        },
+        "file-mapping": {
+            "[project-root]/.editorconfig": false,
+            "[project-root]/.gitattributes": false,
+            "[web-root]/example.gitignore": false,
+            "[web-root]/INSTALL.txt": false,
+            "[web-root]/README.txt": false,
+            "[web-root]/sites/README.txt": false,
+            "[web-root]/sites/development.services.yml": false,
+            "[web-root]/sites/example.settings.local.php": false,
+            "[web-root]/sites/example.sites.php": false,
+            "[web-root]/sites/default/default.services.yml": false,
+            "[web-root]/sites/default/default.settings.php": false,
+            "[web-root]/modules/README.txt": false,
+            "[web-root]/profiles/README.txt": false,
+            "[web-root]/themes/README.txt": false
+        },
+        "installer-types": [
+            "npm-asset",
+            "bower-asset",
+            "arocom-module",
+            "arocom-theme",
+            "arocom-profile",
+            "arocom-drush"
+        ],
+        "installer-paths": {
+            "web/core": ["type:drupal-core"],
+            "web/modules/contrib/{$name}": ["type:drupal-module"],
+            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
+            "web/themes/contrib/{$name}": ["type:drupal-theme"],
+            "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
+            "web/modules/arocom/{$name}": [
+                "type:arocom-module"
+            ],
+            "web/profiles/arocom/{$name}": [
+                "type:arocom-profile"
+            ],
+            "web/themes/arocom/{$name}": [
+                "type:arocom-theme"
+            ],
+            "drush/arocom/{$name}": [
+                "type:arocom-drush"
+            ],
+            "web/libraries/{$name}": [
+                "type:npm-asset",
+                "type:bower-asset",
+                "type:drupal-library",
+                "type:arocom-library"
+            ]
+        },
+        "merge-plugin": {
+            "include": [
+                "web/modules/custom/**/*/composer.json",
+                "web/modules/custom/*/composer.json",
+                "web/modules/arocom/**/*/composer.json",
+                "web/modules/arocom/*/composer.json",
+                "web/profiles/custom/*/composer.json",
+                "web/profiles/arocom/*/composer.json",
+                "web/themes/custom/*/composer.json",
+                "web/themes/arocom/*/composer.json"
+            ]
+        }
+    }
+}
