@@ -1,7 +1,7 @@
 {
-    "name": "arocom-composer/drupal-l3d",
+    "name": "arocom-composer/drupal-project",
     "description": "Project template for Drupal 8 projects with composer",
-    "type": "library",
+    "type": "project",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -111,10 +111,6 @@
             "url": "git@service.arocom.de:arocom/arocom_block_content.git"
         },
         {
-            "type": "github",
-            "url": "https://github.com/ntxbv/arocomcomposer"
-        },
-        {
             "type": "git",
             "url": "git@service.arocom.de:arocom/arocom_layouts.git"
         },
@@ -138,26 +134,29 @@
     "require": {
         "php": ">=7.0.8",
         "ext-json": "*",
+        "arocom/arocom_feedback": "^2",
+        "arocom/drush_collection": "dev-14498-drush-9",
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6.5",
-        "drupal/admin_toolbar": "dev-master",
-        "drupal/config_filter": "dev-master",
-        "drupal/config_split": "dev-master",
-        "drupal/config_sync": "dev-master",
+        "drupal/admin_toolbar": "3.0.0",
+        "drupal/config_filter": "2.2.0",
+        "drupal/config_split": "2.0.0-beta2",
+        "drupal/config_sync": "^2.0@beta",
         "drupal/core": "^8.8.0",
         "drupal/core-composer-scaffold": "^8.8.0",
-        "drupal/key": "dev-master",
-        "drupal/masquerade": "dev-master",
-        "drupal/pathauto": "dev-master",
-        "drupal/redis": "dev-master",
-        "drupal/stage_file_proxy": "dev-master",
+        "drupal/key": "1.14.0",
+        "drupal/masquerade": "2.0.0-beta4",
+        "drupal/pathauto": "1.8.0",
+        "drupal/redis": "1.5.0",
+        "drupal/stage_file_proxy": "1.1.0",
         "drush/drush": "^9.7.1 | ^10.0.0",
-        "lakedrops/docker4drupal": "dev-master",
-        "oomphinc/composer-installers-extender": "dev-master",
-        "vlucas/phpdotenv": "dev-master",
-        "webflo/drupal-finder": "dev-master",
-        "webmozart/path-util": "dev-master",
-        "zaporylie/composer-drupal-optimizations": "dev-master"
+        "eugenz3rr-arocom/composer-merge-plugin": "dev-master",
+        "lakedrops/docker4drupal": "^3.2",
+        "oomphinc/composer-installers-extender": "^2",
+        "vlucas/phpdotenv": "^4.0",
+        "webflo/drupal-finder": "^1",
+        "webmozart/path-util": "^2",
+        "zaporylie/composer-drupal-optimizations": "^1.0"
     },
     "require-dev": {
         "drupal/core-dev": "^8.8.0",
