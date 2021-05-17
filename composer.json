@@ -1,5 +1,5 @@
 {
-    "name": "arocom-composer/drupal-project",
+    "name": "arocom-composer/drupal-l3d",
     "description": "Project template for Drupal 8 projects with composer",
     "type": "library",
     "license": "GPL-2.0-or-later",
