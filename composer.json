@@ -182,8 +182,8 @@
             "mv ScriptHandler.php ./scripts/composer",
             "cp ./web/sites/default/settings.php ./settings/default"
         ],
-        "arocom-post-scaffold": "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
         "arocom-base-patches": "DrupalProject\\composer\\ScriptHandler::applyBasePatches",
+        "arocom-post-scaffold": "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
         "arocom-git-purge": "DrupalProject\\composer\\ScriptHandler::removeGitRepositories",
         "post-install-cmd": [
             "DrupalProject\\composer\\ScriptHandler::postInstall"
