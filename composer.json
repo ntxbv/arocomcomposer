@@ -178,8 +178,12 @@
         "files": ["load.environment.php"]
     },
     "scripts": {
-        "arocom-base-patches": "DrupalProject\\composer\\ScriptHandler::applyBasePatches",
+        "pre-update-cmd": [
+            "mv ScriptHandler.php ./scripts/composer",
+            "cp ./web/sites/default/settings.php ./settings/default"
+        ],
         "arocom-post-scaffold": "DrupalProject\\composer\\ScriptHandler::createRequiredFiles",
+        "arocom-base-patches": "DrupalProject\\composer\\ScriptHandler::applyBasePatches",
         "arocom-git-purge": "DrupalProject\\composer\\ScriptHandler::removeGitRepositories",
         "post-install-cmd": [
             "DrupalProject\\composer\\ScriptHandler::postInstall"
@@ -193,11 +197,8 @@
         ],
         "tdd-phpunit": [
             "./vendor/bin/phpunit -c core/phpunit.xml --testsuite=unit"
-        ],
-        "IncludeScripthandler": [
-            "mv ScriptHandler.php ./scripts/composer",
-            "cp ./web/sites/default/settings.php ./settings/default"
         ]
+
     },
     "scripts-descriptions": {
         "tdd-phantomjs": "Drupal 8: Run PhantomJS.",
