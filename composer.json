@@ -195,7 +195,8 @@
             "./vendor/bin/phpunit -c core/phpunit.xml --testsuite=unit"
         ],
         "IncludeScripthandler": [
-            "mv ScriptHandler.php ./scripts/composer"
+            "mv ScriptHandler.php ./scripts/composer",
+            "cp ./web/sites/default/settings.php ./settings/default"
         ]
     },
     "scripts-descriptions": {
@@ -203,7 +204,7 @@
         "tdd-phpunit": "Drupal 8: Run Drupal's 8 core Unit tests."
     },
     "extra": {
-
+        "patches-file": "patches/composer.patches.json",
         "enable-patching": true,
         "composer-exit-on-patch-failure": true,
         "patchLevel": {
