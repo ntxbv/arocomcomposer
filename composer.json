@@ -202,7 +202,8 @@
     },
     "scripts-descriptions": {
         "tdd-phantomjs": "Drupal 8: Run PhantomJS.",
-        "tdd-phpunit": "Drupal 8: Run Drupal's 8 core Unit tests."
+        "tdd-phpunit": "Drupal 8: Run Drupal's 8 core Unit tests.",
+        "Basehandler": "Prepares arocom specific scaffolds regarding L3D functionallity"
     },
     "extra": {
         "patches-file": "patches/composer.patches.json",
