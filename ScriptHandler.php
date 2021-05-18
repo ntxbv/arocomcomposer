@@ -109,6 +109,17 @@ class ScriptHandler {
       echo "settings.php.patch has been copied! \n";
     }
 
+    # Create Settings.php scaffolds
+    source = '/var/www/web/sites/default/settings.php';
+    $destination = './settings/default/settings.php';
+    if( !copy($source, $destination) ) {
+      echo "File can't be copied! \n";
+    }
+    else {
+      echo "settings.php has been copied! \n";
+    }
+
+
 
     $io = $event->getIO();
     $patches_file = file_get_contents('patches/base.patches.json');
