@@ -206,7 +206,7 @@
         "Basehandler": "Prepares arocom specific scaffolds regarding L3D functionallity"
     },
     "extra": {
-        "patches-file": "patches/composer.patches.json",
+        
         "enable-patching": true,
         "composer-exit-on-patch-failure": true,
         "patchLevel": {
