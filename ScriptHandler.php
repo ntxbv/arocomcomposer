@@ -247,13 +247,13 @@ class ScriptHandler {
         $settingsLocal['config_directories']['sync'] = (object) [
             'value' => Path::makeRelative($drupalFinder->getComposerRoot() . '/config/default/sync', $drupalRoot),
             'required' => TRUE,
-        ];*/
+        ];
         drupal_rewrite_settings($settingsLocal, $composerRoot . '/settings/default/settings.local.php');
         $fs->chmod($composerRoot . '/settings/default/settings.local.php', 0666);
         $event->getIO()->write("Adjusted the settings/default/local.settings.php file with chmod 0666");
 
-        #}
-
+        }
+*/
         /*
          * Prepare local settings file.
          */
@@ -319,15 +319,15 @@ class ScriptHandler {
         $io = $event->getIO();
         $io->write('fetch arocom layer');
         $_SESSION = false;
-#        if (!isset($_SESSION['function_ran'])) {
-#            exec("sed -i -e '/<?php/{r ./drupal/sites/default/default.settings.php' -e 'd}' ./settings/default/settings.php");
-#            exec("sed -i -e '/<?php/{r ./drupal/sites/example.settings.local.php' -e 'd}' ./settings/default/settings.local.php");
-#            $file = $composerRoot . '/settings/default/settings.php';
-#            $current = file_get_contents($file);
-#            $current .= "if (file_exists( '../drupal/sites/default/settings.docker.php')) \n {include '../drupal/sites/default/settings.docker.php';}";
-#            file_put_contents($file, $current, LOCK_EX);
-#            $_SESSION['function_ran'] = true;
-#        }
+        if (!isset($_SESSION['function_ran'])) {
+            exec("sed -i -e '/<?php/{r ./drupal/sites/default/default.settings.php' -e 'd}' ./settings/default/settings.php");
+            exec("sed -i -e '/<?php/{r ./drupal/sites/example.settings.local.php' -e 'd}' ./settings/default/settings.local.php");
+            $file = $composerRoot . '/settings/default/settings.php';
+            $current = file_get_contents($file);
+            $current .= "if (file_exists( '../drupal/sites/default/settings.docker.php')) \n {include '../drupal/sites/default/settings.docker.php';}";
+            file_put_contents($file, $current, LOCK_EX);
+            $_SESSION['function_ran'] = true;
+        }
         if (!$fs->exists($composerRoot . '/scripts/arocom') || (!$fs->exists($composerRoot . '/scripts/arocom/ahoy.arocom.yml'))) {
             mkdir($composerRoot . '/scripts/arocom', 0777, true);
             copy($composerRoot . '../../arocom-ahoy/ahoy.arocom.yml', $composerRoot . '/scripts/arocom/ahoy.arocom.yml');
