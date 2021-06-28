@@ -162,30 +162,30 @@ class ScriptHandler {
                 'required' => TRUE,
             ];
             drupal_rewrite_settings($settings, $composerRoot . '/settings/default/settings.php');
-             $settings['settings']['redis.connection']['host'] = (object)[
-                 'value' => 'redis',
-                 'required' => TRUE,
-             ];
-             drupal_rewrite_settings($settings, $composerRoot . '/settings/default/settings.php');
-             $settings['settings']['redis.connection']['port'] = (object)[
-                 'value' => '6379',
-                 'required' => TRUE,
-             ];
-             drupal_rewrite_settings($settings, $composerRoot . '/settings/default/settings.php');
-             $settings['settings']['cache']['bins']['bootstrap'] = (object)[
-                 'value' => 'cache.backend.chainedfast',
-                 'required' => TRUE,
-             ];
-             drupal_rewrite_settings($settings, $composerRoot . '/settings/default/settings.php');
-             $settings['settings']['cache']['bins']['discovery'] = (object)[
-                 'value' => 'cache.backend.chainedfast',
-                 'required' => TRUE,
-             ];
-             drupal_rewrite_settings($settings, $composerRoot . '/settings/default/settings.php');
-             $settings['settings']['cache']['bins']['config'] = (object)[
-                 'value' => 'cache.backend.chainedfast',
-                 'required' => TRUE,
-             ];
+            $settings['settings']['redis.connection']['host'] = (object)[
+                'value' => 'redis',
+                'required' => TRUE,
+            ];
+            drupal_rewrite_settings($settings, $composerRoot . '/settings/default/settings.php');
+            $settings['settings']['redis.connection']['port'] = (object)[
+                'value' => '6379',
+                'required' => TRUE,
+            ];
+            drupal_rewrite_settings($settings, $composerRoot . '/settings/default/settings.php');
+            $settings['settings']['cache']['bins']['bootstrap'] = (object)[
+                'value' => 'cache.backend.chainedfast',
+                'required' => TRUE,
+            ];
+            drupal_rewrite_settings($settings, $composerRoot . '/settings/default/settings.php');
+            $settings['settings']['cache']['bins']['discovery'] = (object)[
+                'value' => 'cache.backend.chainedfast',
+                'required' => TRUE,
+            ];
+            drupal_rewrite_settings($settings, $composerRoot . '/settings/default/settings.php');
+            $settings['settings']['cache']['bins']['config'] = (object)[
+                'value' => 'cache.backend.chainedfast',
+                'required' => TRUE,
+            ];
             drupal_rewrite_settings($settings, $composerRoot . '/settings/default/settings.php');
             $settings['settings']['update_free_access'] = (object)[
                 'value' => 'FALSE',
@@ -319,15 +319,15 @@ class ScriptHandler {
         $io = $event->getIO();
         $io->write('fetch arocom layer');
         $_SESSION = false;
-#        if (!isset($_SESSION['function_ran'])) {
-#            exec("sed -i -e '/<?php/{r ./drupal/sites/default/default.settings.php' -e 'd}' ./settings/default/settings.php");
-#            exec("sed -i -e '/<?php/{r ./drupal/sites/example.settings.local.php' -e 'd}' ./settings/default/settings.local.php");
-#            $file = $composerRoot . '/settings/default/settings.php';
-#            $current = file_get_contents($file);
-#            $current .= "if (file_exists( '../drupal/sites/default/settings.docker.php')) \n {include '../drupal/sites/default/settings.docker.php';}";
-#            file_put_contents($file, $current, LOCK_EX);
-#            $_SESSION['function_ran'] = true;
-#        }
+        if (!isset($_SESSION['function_ran'])) {
+            exec("sed -i -e '/<?php/{r ./drupal/sites/default/default.settings.php' -e 'd}' ./settings/default/settings.php");
+            exec("sed -i -e '/<?php/{r ./drupal/sites/example.settings.local.php' -e 'd}' ./settings/default/settings.local.php");
+            $file = $composerRoot . '/settings/default/settings.php';
+            $current = file_get_contents($file);
+            $current .= "if (file_exists( '../drupal/sites/default/settings.docker.php')) \n {include '../drupal/sites/default/settings.docker.php';}";
+            file_put_contents($file, $current, LOCK_EX);
+            $_SESSION['function_ran'] = true;
+        }
         if (!$fs->exists($composerRoot . '/scripts/arocom') || (!$fs->exists($composerRoot . '/scripts/arocom/ahoy.arocom.yml'))) {
             mkdir($composerRoot . '/scripts/arocom', 0777, true);
             copy($composerRoot . '../../arocom-ahoy/ahoy.arocom.yml', $composerRoot . '/scripts/arocom/ahoy.arocom.yml');
