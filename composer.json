@@ -184,6 +184,7 @@
     "drupal/core-dev": "8.9.16",
     "drupal/crop": "2.1.0",
     "drupal/ctools": "3.6.0",
+    "drupal/devel": "4.1.1",
     "drupal/disable_html5_validation": "1.1.0",
     "drupal/dropzonejs": "2.5.0",
     "drupal/drush_language": "1.0.0-rc4",
@@ -304,10 +305,10 @@
       "./vendor/bin/phpunit -c core/phpunit.xml --testsuite=unit"
     ],
     "aro-set": [
-      "sed -i -e 322,330's/.*/#&/' ./scripts/composer/ScriptHandler.php"
+      "sed -i -e 322,330's/.*/#&/' ./scripts/composer/ScriptHandler.php && sed -i -e 165,188's/.*/#&/' ./scripts/composer/ScriptHandler.php "
     ],
     "aro-set1": [
-      "sed -i -e 322,330's/#//' ./scripts/composer/ScriptHandler.php"
+      "sed -i -e 322,330's/#//' ./scripts/composer/ScriptHandler.php && sed -i -e 165,188's/#//' ./scripts/composer/ScriptHandler.php"
     ],
     "aro-set2": [
       "sed -i -e '168d' ./settings/default/settings.local.php"
