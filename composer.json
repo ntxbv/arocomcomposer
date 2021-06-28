@@ -303,13 +303,13 @@
     "tdd-phpunit": [
       "./vendor/bin/phpunit -c core/phpunit.xml --testsuite=unit"
     ],
-    "aro-sett": [
+    "aro-set": [
       "sed -i -e 322,330's/.*/#&/' ./scripts/composer/ScriptHandler.php"
     ],
-    "aro-sett1": [
+    "aro-set1": [
       "sed -i -e 322,330's/#//' ./scripts/composer/ScriptHandler.php"
     ],
-    "aro-sett2": [
+    "aro-set2": [
       "sed -i -e '168d' ./settings/default/settings.local.php"
     ]
   },
