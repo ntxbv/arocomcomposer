@@ -235,7 +235,7 @@ class ScriptHandler {
                   'required' => TRUE,
 
               ];*/
-        $settingsLocal['settings']['hash_salt']= (object)[
+       /* $settingsLocal['settings']['hash_salt']= (object)[
             'value' => "file_get_contents(__DIR__ . '/../../salt.txt')",
             'required' => TRUE,
 
@@ -319,24 +319,20 @@ class ScriptHandler {
         $io = $event->getIO();
         $io->write('fetch arocom layer');
         $_SESSION = false;
-        if (!isset($_SESSION['function_ran'])) {
-            exec("sed -i -e '/<?php/{r ./drupal/sites/default/default.settings.php' -e 'd}' ./settings/default/settings.php");
-            exec("sed -i -e '/<?php/{r ./drupal/sites/example.settings.local.php' -e 'd}' ./settings/default/settings.local.php");
-            $file = $composerRoot . '/settings/default/settings.php';
-            $current = file_get_contents($file);
-            $current .= "if (file_exists( '../drupal/sites/default/settings.docker.php')) \n {include '../drupal/sites/default/settings.docker.php';}";
-            file_put_contents($file, $current, LOCK_EX);
-            $_SESSION['function_ran'] = true;
-        }
+#        if (!isset($_SESSION['function_ran'])) {
+#            exec("sed -i -e '/<?php/{r ./drupal/sites/default/default.settings.php' -e 'd}' ./settings/default/settings.php");
+#            exec("sed -i -e '/<?php/{r ./drupal/sites/example.settings.local.php' -e 'd}' ./settings/default/settings.local.php");
+#            $file = $composerRoot . '/settings/default/settings.php';
+#            $current = file_get_contents($file);
+#            $current .= "if (file_exists( '../drupal/sites/default/settings.docker.php')) \n {include '../drupal/sites/default/settings.docker.php';}";
+#            file_put_contents($file, $current, LOCK_EX);
+#            $_SESSION['function_ran'] = true;
+#        }
         if (!$fs->exists($composerRoot . '/scripts/arocom') || (!$fs->exists($composerRoot . '/scripts/arocom/ahoy.arocom.yml'))) {
             mkdir($composerRoot . '/scripts/arocom', 0777, true);
             copy($composerRoot . '../../arocom-ahoy/ahoy.arocom.yml', $composerRoot . '/scripts/arocom/ahoy.arocom.yml');
             copy($composerRoot . '../../arocom-ahoy/.ahoy.yml', $composerRoot . '/.ahoy.yml');
         }
-        /*if(!$fs->exists($composerRoot . '/settings/default/settings.docker.php')) {
-            exec("cp ../drupal/sites/default/settings.docker.php ../settings/default/settings.docker.php");
-            exec('ln -s ../drupal/sites/default/settings.docker.php ../settings/default/settings.docker.php');
-        }*/
     }
 
     /**
