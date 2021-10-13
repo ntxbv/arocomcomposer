@@ -120,7 +120,6 @@
     "composer-plugin-api": "^1||^2",
     "composer/composer": "^1||^2",
     "cweagans/composer-patches": "^1",
-    "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
     "drupal/admin_toolbar": "^3.0",
     "drupal/config_filter": "1.8.0",
     "drupal/config_split": "1.7.0",
@@ -148,10 +147,7 @@
     "vlucas/phpdotenv": "^2",
     "webflo/drupal-finder": "^1",
     "webmozart/path-util": "^2",
-    "wikimedia/composer-merge-plugin": "2.0.1",
-    "symfony/debug": "^3.4||^4.4||^5.0",
-    "symfony/phpunit-bridge": "^3.4||^4.4||^5.0",
-    "squizlabs/php_codesniffer": "^3.5"
+    "wikimedia/composer-merge-plugin": "2.0.1"
   },
   "conflict": {
     "drupal/drupal": "*"
