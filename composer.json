@@ -118,7 +118,6 @@
     "arocom/scripthandler": "^2",
     "composer/installers": "^1.9",
     "composer-plugin-api": "^1||^2",
-    "composer/composer": "^1||^2",
     "cweagans/composer-patches": "^1",
     "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
     "drupal/admin_toolbar": "^3.0",
