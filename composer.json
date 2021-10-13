@@ -84,54 +84,6 @@
       "url": "git@service.arocom.de:arocom/ui_toggle.git"
     },
     {
-      "type": "package",
-      "package": {
-        "type": "drupal-library",
-        "name": "desandro/masonry",
-        "version": "4.2.2",
-        "dist": {
-          "url": "https://github.com/desandro/masonry/archive/v4.2.2.zip",
-          "type": "zip"
-        }
-      }
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "kenwheeler/slick",
-        "version": "1.8.1",
-        "type": "drupal-library",
-        "dist": {
-          "url": "https://github.com/kenwheeler/slick/archive/v1.8.1.zip",
-          "type": "zip"
-        }
-      }
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "enyo/dropzone",
-        "version": "5.7.1",
-        "type": "drupal-library",
-        "dist": {
-          "url": "https://github.com/enyo/dropzone/archive/v5.7.0.zip",
-          "type": "zip"
-        }
-      }
-    },
-    {
-      "type": "package",
-      "package": {
-        "type": "drupal-library",
-        "name": "harvesthq/chosen",
-        "version": "1.8.7",
-        "dist": {
-          "url": "https://github.com/harvesthq/chosen-package/archive/v1.8.7.zip",
-          "type": "zip"
-        }
-      }
-    },
-    {
       "type": "git",
       "url": "git@service.arocom.de:arocom/arocom_block_content.git"
     },
