@@ -21,9 +21,6 @@
   "autoload": {
     "classmap": [
       "vendor/arocom/scripthandler/ScriptHandler.php"
-    ],
-    "files": [
-      "./load.environment.php"
     ]
   },
   "repositories": [
@@ -140,6 +137,7 @@
     "drupal/stage_file_proxy": "1.1.0",
     "drush/drush": "^10.2",
     "lakedrops/ahoy": "^1.5||dev-master",
+    "lakedrops/d9-project-scaffold": "^1.2||dev-master",
     "lakedrops/behat4drupal": "^3.0||dev-master",
     "lakedrops/composer-json-utils": "^2.0||dev-master",
     "lakedrops/docker4drupal": "^3.0||dev-master",
