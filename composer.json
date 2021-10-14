@@ -23,7 +23,7 @@
       "vendor/arocom/scripthandler/ScriptHandler.php"
     ],
     "files": [
-      "drupal/load.environment.php"
+      "./load.environment.php"
     ]
   },
   "repositories": [
@@ -169,7 +169,7 @@
       "ScriptHandler\\ScriptHandler::postUpdate"
     ],
     "tdd-phantomjs": [
-      "mkdir -p drupal/sites/default/simpletest && chmod 777 drupal/sites/default/simpletest",
+      "mkdir -p web/sites/default/simpletest && chmod 777 web/sites/default/simpletest",
       "./tests/bin/phantomjs --ssl-protocol=any --ignore-ssl-errors=true ./vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768 > /dev/null 2>&1"
     ],
     "tdd-phpunit": [
@@ -190,37 +190,37 @@
       "arocom-drush"
     ],
     "installer-paths": {
-      "drupal/core": [
+      "web/core": [
         "type:drupal-core"
       ],
-      "drupal/modules/contrib/{$name}": [
+      "web/modules/contrib/{$name}": [
         "type:drupal-module"
       ],
-      "drupal/profiles/contrib/{$name}": [
+      "web/profiles/contrib/{$name}": [
         "type:drupal-profile"
       ],
-      "drupal/themes/contrib/{$name}": [
+      "web/themes/contrib/{$name}": [
         "type:drupal-theme"
       ],
-      "drush/contrib/{$name}": [
+      "web/contrib/{$name}": [
         "type:drupal-drush"
       ],
-      "drupal/modules/arocom/{$name}": [
+      "web/modules/arocom/{$name}": [
         "type:arocom-module"
       ],
-      "drupal/profiles/arocom/{$name}": [
+      "web/profiles/arocom/{$name}": [
         "type:arocom-profile"
       ],
-      "drupal/themes/arocom/{$name}": [
+      "web/themes/arocom/{$name}": [
         "type:arocom-theme"
       ],
-      "drush/arocom/{$name}": [
+      "web/arocom/{$name}": [
         "type:arocom-drush"
       ],
       "drush/Commands/{$name}": [
         "type:drupal-drush"
     ],
-      "drupal/libraries/{$name}": [
+      "web/libraries/{$name}": [
         "type:npm-asset",
         "type:bower-asset",
         "type:drupal-library",
@@ -231,18 +231,18 @@
     "enable-patching": true,
     "composer-exit-on-patch-failure": false,
     "patchLevel": {
-      "drupal/core": "-p2"
+      "web/core": "-p2"
     },
     "merge-plugin": {
       "include": [
-        "drupal/modules/custom/**/*/composer.json",
-        "drupal/modules/custom/*/composer.json",
-        "drupal/modules/arocom/**/*/composer.json",
-        "drupal/modules/arocom/*/composer.json",
-        "drupal/profiles/custom/*/composer.json",
-        "drupal/profiles/arocom/*/composer.json",
-        "drupal/themes/custom/*/composer.json",
-        "drupal/themes/arocom/*/composer.json"
+        "web/modules/custom/**/*/composer.json",
+        "web/modules/custom/*/composer.json",
+        "web/modules/arocom/**/*/composer.json",
+        "web/modules/arocom/*/composer.json",
+        "web/profiles/custom/*/composer.json",
+        "web/profiles/arocom/*/composer.json",
+        "web/themes/custom/*/composer.json",
+        "web/themes/arocom/*/composer.json"
       ]
     },
     "drupal-scaffold": {
