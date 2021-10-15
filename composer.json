@@ -1,507 +1,275 @@
-<?php
-
-namespace ScriptHandler;
-
-/**
- * @file
- * Contains \ScriptHandler\ScriptHandler.
- *
- * This file is executed on composer update/install runs.
- */
-
-use Composer\Script\Event;
-use Drupal\Core\Site\Settings;
-use DrupalFinder\DrupalFinder;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Yaml\Yaml;
-
-/**
- * ScriptHandler prepares your Drupal 8 installation.
- *
- * @package ScriptHandler
- */
-class ScriptHandler {
-
-    /**
-     * Fired when a 'composer install' command was executed.
-     *
-     * @param \Composer\Script\Event $event
-     *   Expects an composer event object.
-     *
-     * @throws \Exception
-     */
-    public static function postInstall(Event $event) {
-        
-        self::createRequiredFiles($event);
-        self::removeGitDirectories($event);
-        self::clearRedisCache($event);
-        self::generateAliases($event);
+{
+    "name": "arocom/arocom-d9",
+    "description": "Project template for Drupal 9 projects with composer",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+      {
+        "name": "Nils Traut",
+        "role": ""
+      }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+      "platform": {
+        "php": "7.4.23"
+      },
+      "sort-packages": true,
+      "preferred-install": "dist"
+    },
+    "autoload": {
+      "classmap": [
+        "vendor/arocom/scripthandler/ScriptHandler.php"
+      ]
+    },
+    "repositories": [
+      {
+        "type": "composer",
+        "url": "https://packages.drupal.org/8"
+      },
+      {
+        "type": "composer",
+        "url": "https://asset-packagist.org"
+      },
+      {
+        "type": "git",
+        "url": "git@service.arocom.de:arocom/arocom_antispam.git"
+      },
+      {
+        "type": "git",
+        "url": "git@service.arocom.de:arocom/arocom_back_to_top.git"
+      },
+      {
+        "type": "git",
+        "url": "git@service.arocom.de:arocom/arocom_feedback.git"
+      },
+      {
+        "type": "git",
+        "url": "git@service.arocom.de:arocom/drush_collection.git"
+      },
+      {
+        "type": "git",
+        "url": "git@service.arocom.de:arocom/form_element_access.git"
+      },
+      {
+        "type": "git",
+        "url": "git@service.arocom.de:arocom/arocom_changelog.git"
+      },
+      {
+        "type": "git",
+        "url": "git@service.arocom.de:arocom/route_access_alter.git"
+      },
+      {
+        "type": "git",
+        "url": "git@service.arocom.de:arocom/localized_config.git"
+      },
+      {
+        "type": "git",
+        "url": "git@service.arocom.de:arocom/dynamic_entity_list.git"
+      },
+      {
+        "type": "git",
+        "url": "git@service.arocom.de:arocom/arocom_google_tag.git"
+      },
+      {
+        "type": "git",
+        "url": "git@service.arocom.de:arocom/arocom_entity_autocomplete.git"
+      },
+      {
+        "type": "git",
+        "url": "git@service.arocom.de:arocom/ui_toggle.git"
+      },
+      {
+        "type": "git",
+        "url": "git@service.arocom.de:arocom/arocom_block_content.git"
+      },
+      {
+        "type": "git",
+        "url": "git@service.arocom.de:arocom/arocom_layouts.git"
+      },
+      {
+        "type": "git",
+        "url": "git@service.arocom.de:arocom/arocom_block_content_clone.git"
+      },
+      {
+        "type": "git",
+        "url": "git@service.arocom.de:arocom/arocom_mmenu.git"
+      },
+      {
+        "type": "git",
+        "url": "git@service.arocom.de:arocom/arocom_masquerade.git"
+      },
+      {
+        "type": "git",
+        "url": "git@service.arocom.de:arocom/arocom_scripthandler.git"
+      },
+      {
+        "type": "git",
+        "url": "git@service.arocom.de:arocom/arocom_utils.git"
+      },
+      {
+        "type": "git",
+        "url": "git@service.arocom.de:arocom/arocom_l3d_migration.git"
+      }
+    ],
+    "require": {
+      "composer-plugin-api": "^1||^2",
+      "arocom/arocom_feedback": "^3",
+      "arocom/drush_collection": "^2",
+      "arocom/scripthandler": "^2",
+      "composer/composer": "^1||^2",
+      "composer/installers": "^1.9",
+      "cweagans/composer-patches": "^1",
+      "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+      "drupal-code-builder/drupal-code-builder-drush": "^9.0",
+      "drupal/admin_toolbar": "^3.0",
+      "drupal/coder": "^8.3",
+      "drupal/config_filter": "^2.0",
+      "drupal/config_split": "^2.0",
+      "drupal/core": "^9.0",
+      "drupal/core-composer-scaffold": "^9.0",
+      "drupal/devel": "4.1.1",
+      "drupal/entity": "1.2.0",
+      "drupal/extlink": "^1.3",
+      "drupal/field_group": "^3.0",
+      "drupal/key": "1.14.0",
+      "drupal/masquerade": "2.0.0-beta4",
+      "drupal/pathauto": "1.8.0",
+      "drupal/redirect": "1.6.0",
+      "drupal/redis": "1.5.0",
+      "drupal/stage_file_proxy": "1.1.0",
+      "drush/drush": "^10.2",
+      "lakedrops/ahoy": "^1.5||dev-master",
+      "lakedrops/behat4drupal": "^3.0||dev-master",
+      "lakedrops/composer-json-utils": "^2.0||dev-master",
+      "lakedrops/d9-project-scaffold": "dev-master",
+      "lakedrops/docker4drupal": "^3.0||dev-master",
+      "lakedrops/drupal-development-environment": "^3.1",
+      "mglaman/drupal-check": "^1.1",
+      "oomphinc/composer-installers-extender": "^2",
+      "phpseclib/mcrypt_compat": "^2.0",
+      "phpunit/phpunit": "^7||^8.4",
+      "squizlabs/php_codesniffer": "^3.5",
+      "symfony/debug": "^3.4||^4.4||^5.0",
+      "symfony/phpunit-bridge": "^3.4||^4.4||^5.0",
+      "vlucas/phpdotenv": "^2",
+      "webflo/drupal-finder": "^1",
+      "webmozart/path-util": "^2",
+      "wikimedia/composer-merge-plugin": "2.0.1"
+    },
+    "conflict": {
+      "drupal/drupal": "*"
+    },
+    "scripts": {
+      "arocom-post-scaffold": "ScriptHandler\\ScriptHandler::createRequiredFiles",
+      "arocom-base-patches": "ScriptHandler\\ScriptHandler::applyBasePatches",
+      "arocom-git-purge": "ScriptHandler\\ScriptHandler::removeGitRepositories",
+      "post-install-cmd": [
+        "ScriptHandler\\ScriptHandler::postInstall"
+      ],
+      "post-update-cmd": [
+        "ScriptHandler\\ScriptHandler::postUpdate"
+      ],
+      "tdd-phantomjs": [
+        "mkdir -p web/sites/default/simpletest && chmod 777 web/sites/default/simpletest",
+        "./tests/bin/phantomjs --ssl-protocol=any --ignore-ssl-errors=true ./vendor/jcalderonzumba/gastonjs/src/Client/main.js 8510 1024 768 > /dev/null 2>&1"
+      ],
+      "tdd-phpunit": [
+        "./vendor/bin/phpunit -c core/phpunit.xml --testsuite=unit"
+      ]
+    },
+    "scripts-descriptions": {
+      "tdd-phantomjs": "Drupal 8: Run PhantomJS.",
+      "tdd-phpunit": "Drupal 8: Run Drupal's 8 core Unit tests."
+    },
+    "extra": {
+      "installer-types": [
+        "npm-asset",
+        "bower-asset",
+        "arocom-module",
+        "arocom-theme",
+        "arocom-profile",
+        "arocom-drush"
+      ],
+      "installer-paths": {
+        "web/core": [
+          "type:drupal-core"
+        ],
+        "web/modules/contrib/{$name}": [
+          "type:drupal-module"
+        ],
+        "web/profiles/contrib/{$name}": [
+          "type:drupal-profile"
+        ],
+        "web/themes/contrib/{$name}": [
+          "type:drupal-theme"
+        ],
+        "web/contrib/{$name}": [
+          "type:drupal-drush"
+        ],
+        "web/modules/arocom/{$name}": [
+          "type:arocom-module"
+        ],
+        "web/profiles/arocom/{$name}": [
+          "type:arocom-profile"
+        ],
+        "web/themes/arocom/{$name}": [
+          "type:arocom-theme"
+        ],
+        "web/arocom/{$name}": [
+          "type:arocom-drush"
+        ],
+        "drush/Commands/{$name}": [
+          "type:drupal-drush"
+      ],
+        "web/libraries/{$name}": [
+          "type:npm-asset",
+          "type:bower-asset",
+          "type:drupal-library",
+          "type:arocom-library"
+        ]
+      },
+      "patches-file": "https://gitlab.lakedrops.com/composer/plugin/drupal-environment/-/raw/master/patches/d9.json",
+      "enable-patching": true,
+      "composer-exit-on-patch-failure": false,
+      "patchLevel": {
+        "web/core": "-p2"
+      },
+      "merge-plugin": {
+        "include": [
+          "web/modules/custom/**/*/composer.json",
+          "web/modules/custom/*/composer.json",
+          "web/modules/arocom/**/*/composer.json",
+          "web/modules/arocom/*/composer.json",
+          "web/profiles/custom/*/composer.json",
+          "web/profiles/arocom/*/composer.json",
+          "web/themes/custom/*/composer.json",
+          "web/themes/arocom/*/composer.json"
+        ]
+      },
+      "drupal-scaffold": {
+        "locations": {
+          "web-root": "./web",
+          "project-root": "./web"
+        },
+        "file-mapping": {
+          "[project-root]/.editorconfig": false,
+                  "[project-root]/.gitattributes": false,
+                  "[web-root]/example.gitignore": false,
+                  "[web-root]/INSTALL.txt": false,
+                  "[web-root]/README.txt": false,
+                  "[web-root]/sites/README.txt": false,
+                  "[web-root]/sites/development.services.yml": false,
+                  "[web-root]/sites/example.settings.local.php": false,
+                  "[web-root]/sites/example.sites.php": false,
+                  "[web-root]/sites/default/default.services.yml": false,
+                  "[web-root]/sites/default/default.settings.php": false,
+                  "[web-root]/modules/README.txt": false,
+                  "[web-root]/profiles/README.txt": false,
+                  "[web-root]/themes/README.txt": false
+        }
+      }
     }
-
-    /**
-     * Fired when a 'composer install' command was executed.
-     *
-     * @param \Composer\Script\Event $event
-     *   Expects an composer event object.
-     *
-     * @throws \Exception
-     */
-    public static function postUpdate(Event $event) {
-        
-        self::createRequiredFiles($event);
-        self::removeGitDirectories($event);
-        self::clearRedisCache($event);
-        self::generateAliases($event);
-    }
-
-    /**
-     * Patch scaffolding files.
-     *
-     * @param \Composer\Script\Event $event
-     *   Expects an composer event object.
-     *
-     * @throws \Exception
-     */
-    protected static function applyBasePatches(Event $event) {
-        $io = $event->getIO();
-        $fs = new Filesystem();
-        $drupalFinder = new DrupalFinder();
-        $drupalFinder->locateRoot(getcwd());
-        $drupalRoot = $drupalFinder->getDrupalRoot();
-        if (!is_dir("$drupalRoot/patches")){
-            exec("mkdir -p patches/base patches/core patches/libraries patches/modules patches/themes && touch patches/base.patches.json patches/composer.patches.json");
-        };
-        $patches_file = file_get_contents('patches/base.patches.json');
-
-        if (is_string($patches_file)) {
-            $fs = new Filesystem();
-            $patches_list = json_decode($patches_file, TRUE);
-
-            foreach ($patches_list as $patch) {
-                $output_dry = [];
-                exec('patch --dry-run -Np1 -i "' . $patch . '" 2>&1', $output_dry, $return_var);
-
-                $patched_files = [];
-                foreach ($output_dry as $line) {
-                    if (strpos($line, 'checking file ') === 0) {
-                        $patched_files[] = substr($line, 14);
-                    }
-                }
-
-                if (!$return_var) {
-                    $output = [];
-                    exec('patch -Np1 -i "' . $patch . '" 2>&1', $output, $return_var);
-
-                    if (!$return_var) {
-                        $io->write('Patch "' . $patch . '" successfully applied.');
-                    }
-                    else {
-                        $io->write('>>>>>>>');
-                        $io->write('Patch "' . $patch . '" could not be applied, even though dry run succeeded. Debug information below:' . "\n");
-
-                        foreach ($output as $line) {
-                            $io->write($line);
-                        }
-                        $io->write('<<<<<<<');
-                    }
-
-                    foreach ($patched_files as $patched_file) {
-                        if ($fs->exists(__DIR__ . '/' . $patched_file . '.orig')) {
-                            $io->write('File "' . $patched_file . '.orig" detected; patch was not applied cleanly.');
-                        }
-                    }
-                }
-                else {
-                    $output_reverse_dry = [];
-                    exec('patch --dry-run -Np1 -R -i "' . $patch . '" 2>&1', $output_reverse_dry, $return_var);
-
-                    if (!$return_var) {
-                        $io->write('Patch "' . $patch . '" has already been applied.');
-                    }
-                    else {
-                        $io->write('>>>>>>>');
-                        $io->write('Patch "' . $patch . '" could not be applied. Debug information below:' . "\n");
-
-                        foreach ($output_dry as $line) {
-                            $io->write($line);
-                        }
-                        $io->write('<<<<<<<');
-                    }
-                }
-            }
-        }
-        else {
-            $io->write('Could not find base.patches.json.');
-        }
-    }
-
-    /**
-     * Prepare files for Drupal to use.
-     *
-     * @param string $path
-     *   Expects the path of the file that is copied from the example path.
-     * @param string $example_path
-     *   Expects the path to the original file that is copied into the $path.
-     * @param \Symfony\Component\Filesystem\Filesystem $fs
-     *   Expects the file system object.
-     * @param \Composer\Script\Event $event
-     *   Expects the event object.
-     */
-    protected static function prepareFile(string $path, string $example_path, Filesystem $fs, Event $event) {
-        if (
-            !$fs->exists($path) &&
-            $fs->exists($example_path)
-        ) {
-            $fs->copy($example_path, $path);
-            $fs->chmod($path, 0644);
-            $event->getIO()->write("Scaffolded a $path file with chmod 0644.");
-        }
-    }
-
-    /**
-     * Prepare directories for Drupal to use.
-     *
-     * @param string $path
-     *   Expects the path of the directory to create and prepare.
-     * @param \Symfony\Component\Filesystem\Filesystem $fs
-     *   Expects the file system object.
-     * @param \Composer\Script\Event $event
-     *   Expects the event object.
-     */
-    protected static function prepareDir(string $path, Filesystem $fs, Event $event) {
-        if (!$fs->exists($path)) {
-            $oldmask = umask(0);
-            $fs->mkdir($path, 0755);
-            umask($oldmask);
-            $event->getIO()
-                ->write("Create a $path directory with chmod 0755");
-        }
-    }
-
-    /**
-     * Creates needed config files for Drupal 8.
-     *
-     * @param \Composer\Script\Event $event
-     *   Expects an composer event object.
-     *
-     * @throws \Exception
-     */
-    protected static function createRequiredFiles(Event $event) {
-        $fs = new Filesystem();
-        $drupalFinder = new DrupalFinder();
-        $drupalFinder->locateRoot(getcwd());
-        $drupalRoot = $drupalFinder->getDrupalRoot();
-        $composerRoot = $drupalFinder->getComposerRoot();
-        $loader = require_once "$drupalRoot/../vendor/autoload.php";
-
-        // Append the default setting files onto l3d settings files.
-        if (!$fs->exists("$drupalRoot/sites/default/default.settings.php") && (!$fs->exists("$drupalRoot/sites/default/example.settings.local.php"))){
-            copy("$drupalRoot/core/assets/scaffold/files/default.settings.php", "$drupalRoot/sites/default/default.settings.php");
-            copy("$drupalRoot/core/assets/scaffold/files/example.settings.local.php", "$drupalRoot/sites/default/example.settings.local.php");
-        }
-        $settingsPath = $composerRoot . '/settings/default';
-        $settingsPhpFile = $settingsPath . '/settings.php';
-        $settingsPhplocalFile = $settingsPath . '/settings.local.php';
-        if ($fs->exists($settingsPhpFile)) {
-            $settingsPhp = file_get_contents($settingsPhpFile);
-            if (strpos($settingsPhp, '// phpcs:ignoreFile') === FALSE) {
-                exec("sed -i -e '/<?php/{r ./web/sites/default/default.settings.php' -e 'd}' ./settings/default/settings.php");
-            }
-        }
-        if ($fs->exists($settingsPhplocalFile)) {
-            $settingsLocalPhp = file_get_contents($settingsPhplocalFile);
-            if (strpos($settingsLocalPhp, '// phpcs:ignoreFile') === FALSE) {
-                exec("sed -i -e '/<?php/{r ./web/sites/default/example.settings.local.php' -e 'd}' ./settings/default/settings.local.php");
-            }
-        }
-
-        // Prepare directory for database dumps.
-        if (!is_dir('./dumps')) {
-            $fs->mkdir('./dumps', 0777, true);
-            $fs->touch('./dumps/.gitkeep');
-        }
-
-        Settings::initialize($drupalRoot, 'sites/default', $loader);
-
-        // Prepare the settings file for installation.
-        self::prepareFile("$drupalRoot/sites/default/settings.php", "$drupalRoot/sites/default/default.settings.php", $fs, $event);
-
-        // Prepare local settings file.
-        self::prepareFile("$drupalRoot/sites/default/settings.local.php", "$drupalRoot/sites/example.settings.local.php", $fs, $event);
-
-        // Prepare local services file.
-        self::prepareFile("$drupalRoot/sites/default/services.yml", "$drupalRoot/sites/default/default.services.yml", $fs, $event);
-
-        // Prepare development.services.yml.
-        $development_services = [];
-        if ($fs->exists("$drupalRoot/sites/default/development.services.yml")) {
-            $development_services = Yaml::parse(file_get_contents("$drupalRoot/sites/default/development.services.yml"));
-        }
-
-        $new_development_services = self::setDevelopmentServices($development_services);
-        if ($development_services !== $new_development_services) {
-
-            // Development: sites/development.services.yml.
-            $yaml = Yaml::dump($new_development_services, 4, 2);
-            file_put_contents("$drupalRoot/sites/default/development.services.yml", $yaml);
-            $event->getIO()
-                ->write('Appended Twig debug configuration to development.services.yml');
-        }
-
-        // Create the files directory with chmod 0755.
-        self::prepareDir("$drupalRoot/sites/default/files", $fs, $event);
-
-        // Create the files/tmp directory with chmod 0755.
-        self::prepareDir("$drupalRoot/sites/default/files/tmp", $fs, $event);
-    }
-
-    /**
-     * Remove .git directories from vendor packages.
-     *
-     * @param \Composer\Script\Event $event
-     *   Expects an composer event object.
-     */
-    protected static function removeGitDirectories(Event $event) {
-        $fs = new Filesystem();
-        $drupalFinder = new DrupalFinder();
-        $drupalFinder->locateRoot(getcwd());
-        $drupalRoot = $drupalFinder->getDrupalRoot();
-        $vendor = $drupalFinder->getVendorDir();
-
-        // .git directories in the vendor folder.
-        exec('find ' . $vendor . ' -mindepth 2 -name \'.git\' | xargs rm -rf');
-
-        // .git directories in contrib.
-        $types = [
-            'modules',
-            'themes',
-            'profiles',
-        ];
-
-        $sources = [
-            'contrib',
-            'arocom',
-        ];
-
-        foreach ($sources as $source) {
-            foreach ($types as $type) {
-                if ($fs->exists("{$drupalRoot}/{$type}/{$source}")) {
-                    exec("find {$drupalRoot}/{$type}/{$source} -mindepth 2 -name '.git' | xargs rm -rf");
-                }
-            }
-        }
-
-        // Don't forget libraries.
-        if ($fs->exists("{$drupalRoot}/libraries")) {
-            exec("find {$drupalRoot}/libraries -mindepth 2 -name '.git' | xargs rm -rf");
-        }
-    }
-
-    /**
-     * Clear the Redis cache.
-     *
-     * @param \Composer\Script\Event $event
-     *   Expects an composer event object.
-     */
-    protected static function clearRedisCache(Event $event) {
-        $io = $event->getIO();
-
-        $io->write('Clearing Redis cache.');
-
-        exec('redis-cli flushall 2>&1', $output, $return_var);
-
-        if (!$return_var) {
-            $io->write('Redis cache successfully cleared.');
-        }
-        else {
-            $io->write('>>>>>>>');
-            $io->write('Redis cache could not be cleared. Debug information below:' . "\n");
-
-            foreach ($output as $line) {
-                $io->write($line);
-            }
-            $io->write('<<<<<<<');
-        }
-    }
-
-    /**
-     * Generate Drush 9/10 Aliases.
-     *
-     * @param \Composer\Script\Event $event
-     *   Expects an composer event object.
-     */
-    protected static function generateAliases(Event $event) {
-        $io = $event->getIO();
-
-        $io->write('Generating Drush 9/10 aliases.');
-
-        // Check if we are in a supported directory.
-        $cwd = getcwd();
-
-        if (strpos($cwd, '/var/www') !== 0) {
-            return;
-        }
-
-        $generator_include = '/home/vagrant/.drush/generate_aliases.php';
-
-        // Check if the DrupalVM alias generator is available.
-        if (!file_exists($generator_include)) {
-            return;
-        }
-
-        require_once $generator_include;
-
-        $aliases = generate_aliases([$cwd], '', FALSE, TRUE, TRUE);
-
-        $files_dir = 'drupal/drush/sites';
-
-        if (!file_exists($files_dir)) {
-            mkdir($files_dir, 0775, TRUE);
-        }
-        file_put_contents($files_dir . '/self.site.yml', yaml_emit($aliases));
-        file_put_contents($files_dir . '/avm.site.yml', yaml_emit($aliases));
-    }
-
-    /**
-     * Sets the default settings for local development.
-     *
-     * @param array $developmentServices
-     *   Expects the development services.
-     *
-     * @return array
-     *   Returns the set config changes.
-     */
-    private static function setDevelopmentServices(array $developmentServices) {
-
-        if (!array_key_exists('services', $developmentServices)) {
-            $developmentServices = array_merge($developmentServices,
-                ['services' => []]);
-        }
-        if (!array_key_exists('cache.backend.null',
-            $developmentServices['services'])) {
-            $developmentServices['services'] = array_merge($developmentServices['services'],
-                ['cache.backend.null' => []]);
-        }
-
-        if (!array_key_exists('parameters', $developmentServices)) {
-            $developmentServices = array_merge($developmentServices,
-                ['parameters' => []]);
-        }
-        if (!array_key_exists('session.storage.options',
-            $developmentServices['parameters'])) {
-            $developmentServices['parameters'] = array_merge($developmentServices['parameters'],
-                ['session.storage.options' => []]);
-        }
-        if (!array_key_exists('twig.config',
-            $developmentServices['parameters'])) {
-            $developmentServices['parameters'] = array_merge($developmentServices['parameters'],
-                ['twig.config' => []]);
-        }
-        if (!array_key_exists('renderer.config',
-            $developmentServices['parameters'])) {
-            $developmentServices['parameters'] = array_merge($developmentServices['parameters'],
-                ['renderer.config' => []]);
-        }
-        if (!array_key_exists('http.response.debug_cacheability_headers',
-            $developmentServices['parameters'])) {
-            $developmentServices['parameters'] = array_merge($developmentServices['parameters'],
-                ['http.response.debug_cacheability_headers' => FALSE]);
-        }
-        if (!array_key_exists('factory.keyvalue',
-            $developmentServices['parameters'])) {
-            $developmentServices['parameters'] = array_merge($developmentServices['parameters'],
-                ['factory.keyvalue' => []]);
-        }
-        if (!array_key_exists('factory.keyvalue.expirable',
-            $developmentServices['parameters'])) {
-            $developmentServices['parameters'] = array_merge($developmentServices['parameters'],
-                ['factory.keyvalue.expirable' => []]);
-        }
-        if (!array_key_exists('filter_protocols',
-            $developmentServices['parameters'])) {
-            $developmentServices['parameters'] = array_merge($developmentServices['parameters'],
-                ['filter_protocols' => []]);
-        }
-        if (!array_key_exists('cors.config',
-            $developmentServices['parameters'])) {
-            $developmentServices['parameters'] = array_merge($developmentServices['parameters'],
-                ['cors.config' => []]);
-        }
-
-        $developmentServices['services']['cache.backend.null'] = array_merge($developmentServices['services']['cache.backend.null'],
-            [
-                'class' => 'Drupal\Core\Cache\NullBackendFactory',
-            ]);
-
-        $developmentServices['parameters']['session.storage.options'] = array_merge($developmentServices['parameters']['session.storage.options'],
-            [
-                'gc_probability' => 1,
-                'gc_divisor' => 100,
-                'gc_maxlifetime' => 604800,
-                'cookie_lifetime' => 604800,
-            ]);
-        $developmentServices['parameters']['twig.config'] = array_merge($developmentServices['parameters']['twig.config'],
-            [
-                'debug' => TRUE,
-                'auto_reload' => TRUE,
-                'cache' => TRUE,
-            ]);
-        $developmentServices['parameters']['renderer.config'] = array_merge($developmentServices['parameters']['renderer.config'],
-            [
-                'required_cache_contexts' => [
-                    'languages:language_interface',
-                    'theme',
-                    'user.permissions',
-                ],
-                'auto_placeholder_conditions' => [
-                    'max-age' => 0,
-                    'contexts' => ['session', 'user'],
-                    'tags' => [],
-                ],
-            ]);
-        $developmentServices['parameters']['http.response.debug_cacheability_headers'] = FALSE;
-
-        // YAML: {}.
-        $developmentServices['parameters']['factory.keyvalue'] = [];
-
-        // YAML: {}.
-        $developmentServices['parameters']['factory.keyvalue.expirable'] = [];
-
-        $developmentServices['parameters']['filter_protocols'] = array_unique(array_merge($developmentServices['parameters']['filter_protocols'],
-            [
-                'http',
-                'https',
-                'ftp',
-                'news',
-                'nntp',
-                'tel',
-                'telnet',
-                'mailto',
-                'irc',
-                'ssh',
-                'sftp',
-                'webcal',
-                'rstp',
-            ]), SORT_REGULAR);
-
-        $developmentServices['parameters']['cors.config'] = array_merge($developmentServices['parameters']['cors.config'],
-            [
-                'enabled' => TRUE,
-                'allowedHeaders' => [
-                    'x-csrf-token',
-                    'authorization',
-                    'content-type',
-                    'accept',
-                    'origin',
-                    'x-requested-with',
-                ],
-                'allowedMethods' => ['*'],
-                'allowedOrigins' => ['https://maps.googleapis.com'],
-                'exposedHeaders' => FALSE,
-                'maxAge' => FALSE,
-                'supportsCredentials' => FALSE,
-            ]);
-        return $developmentServices;
-    }
-
-}
+  }
+  
