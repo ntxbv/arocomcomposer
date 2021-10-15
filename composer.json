@@ -230,7 +230,7 @@
           "type:arocom-library"
         ]
       },
-      "patches-file": "patches/composer.patches.json",
+    
       "enable-patching": true,
       "composer-exit-on-patch-failure": false,
       "patchLevel": {
