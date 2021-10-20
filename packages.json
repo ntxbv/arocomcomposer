@@ -1,11 +1,11 @@
 {
   "name": "arocom-composer/drupal-project",
   "version": "0.1",
+  "description": "",
   "repository": {
     "type": "git",
-    "url": "https://github.com/monatheoctocat/my_package.git"
+    "url": "https://github.com/ntxbv/arocomcomposer"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Nils Traut",
+  "license": "MIT"
 }
