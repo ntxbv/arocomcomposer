@@ -3,7 +3,7 @@
   "version": "0.1",
   "description": "",
   "repository": {
-    "type": "git",
+    "type": "vcs",
     "url": "https://github.com/ntxbv/arocomcomposer"
   },
   "author": "Nils Traut",
