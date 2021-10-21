@@ -111,10 +111,6 @@
       {
         "type": "git",
         "url": "git@service.arocom.de:arocom/arocom_l3d_migration.git"
-      },
-      {
-        "type": "git",
-        "url": "https://github.com/ntxbv/arocomcomposer"
       }
     ],
     "require": {
