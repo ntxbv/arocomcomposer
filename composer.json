@@ -117,7 +117,7 @@
       "composer-plugin-api": "^1||^2",
       "arocom/arocom_feedback": "^3",
       "arocom/drush_collection": "^2",
-      "arocom/scripthandler": "^2",
+      "arocom/scripthandler": "^3",
       "composer/composer": "^1||^2",
       "composer/installers": "^1.9",
       "cweagans/composer-patches": "^1",
