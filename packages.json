@@ -5,7 +5,7 @@
         "name": "arocom/arocom-d9",
         "version": "1.0",
         "dist": {
-          "url": "/home/ntr/packages.json",
+          "url": "https://github.com/ntxbv/arocomcomposer/packages.json",
           "type": "path"
         }
       }
