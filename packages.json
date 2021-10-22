@@ -1,11 +1,14 @@
 {
-  "name": "arocom-composer/drupal-project",
-  "version": "0.1",
-  "description": "",
-  "repository": {
-    "type": "vcs",
-    "url": "https://github.com/ntxbv/arocomcomposer"
-  },
-  "author": "Nils Traut",
-  "license": "MIT"
+  "packages": {
+    "vendor/package-name": {
+      "dev-master": {
+        "name": "arocom/arocom-d9",
+        "version": "1.0",
+        "dist": {
+          "url": "/home/ntr/packages.json",
+          "type": "path"
+        }
+      }
+    }
+  }
 }
